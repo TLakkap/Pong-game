@@ -35,8 +35,11 @@ public class GamePanel extends JPanel implements Runnable {
     }
 
     public void newBall(){
-        //random = new Random();
-        ball = new Ball((GAME_WIDTH/2)-(BALL_DIAMETER/2), (GAME_HEIGHT/2)-(BALL_DIAMETER/2), BALL_DIAMETER, BALL_DIAMETER);
+        random = new Random();
+        //ball starts from the center
+        //ball = new Ball((GAME_WIDTH/2)-(BALL_DIAMETER/2), (GAME_HEIGHT/2)-(BALL_DIAMETER/2), BALL_DIAMETER, BALL_DIAMETER);
+        //ball starts at a random point at y axel
+        ball = new Ball((GAME_WIDTH/2)-(BALL_DIAMETER/2), random.nextInt(GAME_HEIGHT-BALL_DIAMETER), BALL_DIAMETER, BALL_DIAMETER);
     }
 
     public void newPaddles(){
@@ -55,6 +58,7 @@ public class GamePanel extends JPanel implements Runnable {
         paddle1.draw(g);
         paddle2.draw(g);
         ball.draw(g);
+        score.draw(g);
     }
 
     public void move(){
@@ -108,6 +112,18 @@ public class GamePanel extends JPanel implements Runnable {
         }
         if(paddle2.y >= (GAME_HEIGHT-PADDLE_HEIGHT)){
             paddle2.y = GAME_HEIGHT-PADDLE_HEIGHT;
+        }
+
+        //give a player 1 point and create new paddles & ball
+        if(ball.x <= 0){
+            score.player2++;
+            newPaddles();
+            newBall();
+        }
+        if(ball.x >= GAME_WIDTH-BALL_DIAMETER){
+            score.player1++;
+            newPaddles();
+            newBall();
         }
     }
 
