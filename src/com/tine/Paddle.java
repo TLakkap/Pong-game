@@ -5,7 +5,7 @@ import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
 
-public class Paddle {
+public class Paddle extends Rectangle {
 
     Paddle(){
 
@@ -20,6 +20,13 @@ public class Paddle {
     }
 
     public void setYDirection(int yDirection){
-        
+
+    }
+
+    public void move(){
+
+    }
+    public void draw(Graphics g){
+
     }
 }
